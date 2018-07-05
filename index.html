@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Meal Planner</title>
+   
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+  
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,500,600,700,800,900" rel="stylesheet">
+
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase-database.js"></script>
+    <script src="https://cdn.firebase.com/libs/firebaseui/3.1.1/firebaseui.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.1.1/firebaseui.css" />
+    <script src="assets/javascript/config.js"></script>
+    <script src="assets/javascript/auth.js"></script>
+    <script src="assets/javascript/login.js"></script>
+
+    <!--Vex-->
+    <script src="assets/javascript/vex.js"></script>
+    <link rel="stylesheet" href="assets/css/vex.css">
+    <link rel="stylesheet" href="assets/css/vex-theme-wireframe.css">
+
+    <!-- CSS -->
+    <link href="assets/css/style.css" rel="stylesheet">
+
+</head>
+<body>
+
+<!-- NAV -->
+<div class="nav-container">
+    <nav class="navbar navbar-expand-md navbar-light">
+        <a class="navbar-brand" href="index.html">
+            <img src="assets/images/meal-planner-logo.png" width="200px" class="d-inline-block align-top" alt="">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <button alt="Go to your favorites." class="nav-link navBtn" onclick="loadFavorites()">Favorites</button>
+                </li>
+                <li class="nav-item">
+                    <a alt="Checkout your local grocers." class="nav-link navBtn" href="map.html">Local Grocers</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</div>
+
+<!-- POPUP -->
+<section class="popup-container">
+    <div id="popup"><div id="firebaseui-auth-container"></div></div>
+</section>
+
+<!-- PAGE CONTENT -->
+<div class="row page-container">
+
+    <!-- SIDE BAR -->
+        <div class="col-12 col-md-3">
+            <section class="side-bar">
+                <h3>Ingredient</h3>
+                <ul>
+                    <li class="staticSearch" onclick="staticSearch('chicken')">Chicken<i class="fas fa-utensils"></i></li>
+                    <li class="staticSearch" onclick="staticSearch('cookies')">Cookies<i class="fas fa-utensils"></i></li>
+                    <li class="staticSearch" onclick="staticSearch('pasta')">Pasta<i class="fas fa-utensils"></i></li>
+                    <li class="staticSearch" onclick="staticSearch('salad')">Salad<i class="fas fa-utensils"></i></li>
+                </ul>
+                <h3>Category</h3>
+                <ul>
+                    <li class="staticSearch" onclick="staticSearch('gluten free')">Gluten-Free<i class="far fa-arrow-alt-circle-right"></i></li>
+                    <li class="staticSearch" onclick="staticSearch('healthy')">Healthy<i class="far fa-heart"></i></li>
+                    <li class="staticSearch" onclick="staticSearch('quick and easy')">Quick &amp; Easy <i class="far fa-clock"></i></li>
+                    <li class="staticSearch" onclick="staticSearch('vegetarian')">Vegetarian <i class="fa fa-leaf"></i></li>
+                </ul>
+            </section>
+        </div>
+
+    <!-- SEARCH -->
+    <form class="search-form d-flex justify-content-center">
+        <input id="keyword" class="form-control mr-sm-1 search-input" type="text" placeholder="What are you cooking?" aria-label="Search">
+        <button id="search" class="btn search-button" type="submit"><i class="fas fa-utensils"></i></button>
+    </form>
+
+    <!-- RECEPIES -->
+        <div class="col-12 col-md-9">
+            <div class="row">
+                <div id="recipe"></div>
+
+                <!-- FOOTER -->
+                <div class="jumbotron jumbotron-fluid footer">
+                    <div class="container d-flex justify-content-center">
+                        <!-- <!-- <h1 class="display-4">Fluid jumbotron</h1> -->
+                        <p class="copyright">&copy; 2018 Meal Planner, Inc.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    <!-- MAP -->
+    <div id="map"></div>
+
+</div>
+<!-- END PAGE CONTENT -->
+
+<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+<script src="assets/javascript/app.js"></script>
+
+</body>
+</html>
