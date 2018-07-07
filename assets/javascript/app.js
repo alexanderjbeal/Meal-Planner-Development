@@ -303,5 +303,6 @@ queryRecipes();
 
 function loadMap() {
     $("#recipe").empty();
+    $("#recipe").append('<div id="map"></div>')
     $("#map").html('<object style="" data="map.html"/>');
 }

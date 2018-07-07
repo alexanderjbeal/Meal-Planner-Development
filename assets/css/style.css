@@ -30,8 +30,6 @@ h5 {
     border-bottom: 1px solid black;
     background: white;
 }
-
-
 /* SEARCH */
 .search-form {
     width: 30%;
@@ -56,7 +54,6 @@ h5 {
 }
 
 /* HEADLINE */
-
 .headline-left {
     background: green;
     /* linear-gradient(
@@ -154,21 +151,16 @@ h5 {
     font-weight: bold;
     cursor: pointer;
 }
-
 .staticSearch:hover {
     color: #2db34a;
 }
-
-
 .top.fixedsticky-on,
 .bottom.fixedsticky-on {
 	width: 21.09%;
 }
-
 #sidebar, .top {
 	top: 100px; 
 }
-
 #top-a {
     top: 32px;
 }
