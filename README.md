@@ -1,2 +1,2 @@
-# Project1
+# Meal Planner
 Bootcamp Group Project 1
